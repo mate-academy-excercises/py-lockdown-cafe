@@ -1,21 +1,22 @@
 from datetime import date
-from email import message
-
 import app.errors as errors
 
+
 class Cafe:
-    def __init__(self, name) -> None:
+    def __init__(self, name: str) -> None:
         self.name = name
+
     def visit_cafe(self, visitor: dict) -> str:
 
-        massage = "All friends should be vaccinated"
+        message = "All friends should be vaccinated"
         if not visitor.get("vaccine"):
-            raise errors.NotVaccinatedError(massage)
+            raise errors.NotVaccinatedError(message)
 
         elif visitor["vaccine"]["expiration_date"] < date.today():
-            raise errors.OutdatedVaccineError(massage)
+            raise errors.OutdatedVaccineError(message)
 
         elif not visitor["wearing_a_mask"]:
-            raise errors.NotWearingMaskError(1)
+            raise errors.NotWearingMaskError("k")
 
-        else: return f"Welcome to {self.name}"
+        else:
+            return f"Welcome to {self.name}"
